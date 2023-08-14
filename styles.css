@@ -1,0 +1,62 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  background-color: #881337;
+}
+.main {
+  height: 100%;
+}
+header {
+  background-color: #4c0519;
+  color: bisque;
+  text-align: center;
+  padding: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Tilt Prism', cursive;
+  font-size: 3vw;
+}
+.gameBoard {
+  border: 2px solid black;
+  /* height: 500px; */
+  margin: 3%;
+  display: grid;
+  grid-template-columns: repeat(3, 10vw);
+  grid-template-rows: repeat(3, 10vw);
+  justify-content: center;
+
+  background-color: #881337;
+}
+.gameBoard > div {
+  /* height: 60px;
+  width: 60px; */
+  border: 2px solid red;
+  font-size: 8vw;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.gameBoard > div:hover {
+  background-color: #a09799;
+}
+
+/* utility classes */
+
+.br0 {
+  border-right: 0 !important; /*because there was higher specifity value above so i had to use !important*/
+}
+.bl0 {
+  border-left: 0 !important;
+}
+.bt0 {
+  border-top: 0 !important;
+}
+.bb0 {
+  border-bottom: 0 !important;
+}

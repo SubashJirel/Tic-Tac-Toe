@@ -2,12 +2,39 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Tilt+Prism&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Tic Tac Toe</title>
   </head>
   <body>
-    <h1>Tic Tac Toe</h1>
+    <header><h1>Tic Tac Toe</h1></header>
+    <div class="main">
+      <div class="message"></div>
+      <div class="gameBoard">
+        <div class="box bl0 bt0"><span class="boxText">X</span></div>
+        <div class="box bt0"><span class="boxText">X</span></div>
+        <div class="box br0 bt0"><span class="boxText">X</span></div>
+        <div class="box bl0"><span class="boxText">X</span></div>
+        <div class="box"><span class="boxText">X</span></div>
+        <div class="box br0"><span class="boxText"></span></div>
+        <div class="box bl0 bb0"><span class="boxText"></span></div>
+        <div class="box bb0"><span class="boxText"></span></div>
+        <div class="box bb0 br0"><span class="boxText"></span></div>
+      </div>
+    </div>
+    <div class="gameinfo">
+      <button>Restart</button>
+    </div>
+    <footer>
+      <p>Copyright © 2023 SubashJirel</p>
+    </footer>
+
+    <script src="./script.js"></script>
   </body>
-  <script src="./script.js"></script>
 </html>
