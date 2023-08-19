@@ -75,21 +75,26 @@ const game = (function () {
 
     currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
   };
-  return { start, handleClick };
+  const reset = () => {
+    // since we cannot directly access the gameBoard, so we have to update each box individually
+    for (let i = 0; i < 9; i++) {
+      gameBoard.update(i, '');
+    }
+    gameBoard.render();
+  };
+  const newGame = () => {
+    reset();
+    document.querySelector('.modal-wrapper').removeAttribute('hidden');
+    document.querySelector('.buttonContainer').classList.add('hide');
+    form.reset();
+  };
+  return { start, handleClick, reset, newGame };
 })();
 
-// const initializeVaraibles = (data) => {
-//   //change the string choice from form to number
-//   data.choice = +data.choice;
-//   data.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-//   data.player1 = 'X';
-//   data.player2 = 'O';
-//   data.round = 0;
-//   data.currentPlayer = 'X';
-//   data.gameOver = false;
-// };
+//restart
+const restartButton = document.querySelector('.restart-button');
+restartButton.addEventListener('click', game.reset);
 
-// const initializeGame = (data) => {
-//   initializeVaraibles(data);
-//   console.log(data);
-// };
+//newGame
+const newGame = document.querySelector('.new-game-button');
+newGame.addEventListener('click', game.newGame);

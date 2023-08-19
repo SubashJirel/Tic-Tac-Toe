@@ -53,7 +53,7 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 20px; */
+  /* padding: 20px;f */
 }
 .gameBoard > div:hover {
   background-color: #7d0821;
@@ -115,7 +115,7 @@ header h1 {
   color: bisque;
 }
 .restart-button,
-.start-button {
+.new-game-button {
   padding: 10px 20px;
   border: 0;
   border-radius: 7px;
