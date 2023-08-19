@@ -60,9 +60,37 @@ header h1 {
 }
 
 /* utility classes */
-
-.br0 {
+.gameBoard > :nth-child(1) {
+  border-left: 0 !important;
+  border-top: 0 !important;
+}
+.gameBoard > :nth-child(2) {
+  border-top: 0 !important;
+}
+.gameBoard > :nth-child(3) {
+  border-top: 0 !important;
   border-right: 0 !important; /*because there was higher specifity value above so i had to use !important*/
+}
+.gameBoard > :nth-child(4) {
+  border-left: 0 !important;
+}
+.gameBoard > :nth-child(6) {
+  border-right: 0 !important;
+}
+.gameBoard > :nth-child(7) {
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+}
+.gameBoard > :nth-child(8) {
+  border-bottom: 0 !important;
+}
+.gameBoard > :nth-child(9) {
+  border-bottom: 0 !important;
+  border-right: 0 !important; /*because there was higher specifity value above so i had to use !important*/
+}
+
+/* .br0 {
+  border-right: 0 !important;
 }
 .bl0 {
   border-left: 0 !important;
@@ -72,7 +100,7 @@ header h1 {
 }
 .bb0 {
   border-bottom: 0 !important;
-}
+} */
 .playerBox {
   margin-top: 16px;
 }
