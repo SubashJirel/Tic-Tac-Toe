@@ -62,9 +62,13 @@ const game = (function () {
     // console.log(players);
     // console.log('started');
     gameBoard.render();
+    displayController.renderMessage(
+      `Player ${players[currentPlayerIndex].name}'s turn`
+    );
   };
 
   const handleClick = (event) => {
+    if (gameOver) return; // don't want the players to click if the game is over
     // event.target.id gives the id as square-4, but we only want the number so
     const divIndex = parseInt(event.target.id.split('-')[1]); // divIndex denotes which div to update
 
@@ -73,9 +77,27 @@ const game = (function () {
 
     gameBoard.update(divIndex, players[currentPlayerIndex].mark);
 
+    if (checkForWin(gameBoard.getGameBoard())) {
+      // alert(`${players[currentPlayerIndex].name} won`);
+      displayController.renderMessage(
+        `${players[currentPlayerIndex].name} wins`
+      );
+      gameOver = true;
+      return;
+    } else if (checkForTie(gameBoard.getGameBoard())) {
+      gameOver = true;
+      displayController.renderMessage(`It's a tie`);
+      return;
+    }
+
     currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+    displayController.renderMessage(
+      `Player ${players[currentPlayerIndex].name}'s turn`
+    );
   };
   const reset = () => {
+    displayController.renderMessage('');
+    gameOver = false;
     // since we cannot directly access the gameBoard, so we have to update each box individually
     for (let i = 0; i < 9; i++) {
       gameBoard.update(i, '');
@@ -91,6 +113,35 @@ const game = (function () {
   return { start, handleClick, reset, newGame };
 })();
 
+const displayController = (function () {
+  const renderMessage = (message) => {
+    document.querySelector('.message').innerText = message;
+  };
+  return { renderMessage };
+})();
+
+//check win
+function checkForWin(board) {
+  const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < winningConditions.length; i++) {
+    const [a, b, c] = winningConditions[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) return true; //board[a]&& to check if board isn't empty
+  }
+  return false;
+}
+//check tie
+function checkForTie(board) {
+  return board.every((elem) => elem !== '');
+}
 //restart
 const restartButton = document.querySelector('.restart-button');
 restartButton.addEventListener('click', game.reset);
