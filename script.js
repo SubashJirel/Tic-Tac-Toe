@@ -18,24 +18,30 @@ const gameBoard = (function () {
 
   const render = () => {
     let boardHTML = '';
-    gameBoard.forEach((square, index) => {
-      // square is the element of the array that is either "X" or "O" and index is just a number
-      boardHTML += `<div id="square-${index}" class="square">${square}</div>`;
+    gameBoard.forEach((markXO, index) => {
+      // markXO is the element of the array that is either "X" or "O" and index is just a number
+      boardHTML += `<div id="square-${index}" class="square">${markXO}</div>`;
     });
     document.querySelector('.gameBoard').innerHTML = boardHTML;
 
     // add event listener for each of the square box
     const squares = document.querySelectorAll('.square');
-    console.log(squares);
     squares.forEach((square) => {
       square.addEventListener('click', game.handleClick); //handleclick is part of game, so put in game module
     });
   };
-  return { render };
+  const update = (divIndex, mark) => {
+    gameBoard[divIndex] = mark;
+    render();
+  };
+
+  // to not change the value that is in the div we need an accessor function that return the gameboard
+  const getGameBoard = () => gameBoard;
+  return { render, update, getGameBoard };
 })();
 
-const createPlayer = (naam, mark) => {
-  return { naam, mark };
+const createPlayer = (name, mark) => {
+  return { name, mark };
 };
 const game = (function () {
   let players = [];
@@ -48,19 +54,26 @@ const game = (function () {
       // createPlayer(document.querySelector('#form1').value, 'O'),
       //getting players name from the data collected from form
       createPlayer(data.player1Name, 'X'),
-      createPlayer(data.player2Name, 'X'),
+      createPlayer(data.player2Name, 'O'),
     ];
 
     currentPlayerIndex = 0;
     gameOver = false;
-    console.log(players);
+    // console.log(players);
     // console.log('started');
     gameBoard.render();
   };
+
   const handleClick = (event) => {
     // event.target.id gives the id as square-4, but we only want the number so
-    const index = parseInt(event.target.id.split('-')[1]);
-    console.log(index);
+    const divIndex = parseInt(event.target.id.split('-')[1]); // divIndex denotes which div to update
+
+    //if the div is not empty meaning some symbol X or O is already there then we don't update, simply return
+    if (gameBoard.getGameBoard()[divIndex] !== '') return;
+
+    gameBoard.update(divIndex, players[currentPlayerIndex].mark);
+
+    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
   };
   return { start, handleClick };
 })();
