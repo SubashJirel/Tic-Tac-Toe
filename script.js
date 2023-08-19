@@ -20,9 +20,16 @@ const gameBoard = (function () {
     let boardHTML = '';
     gameBoard.forEach((square, index) => {
       // square is the element of the array that is either "X" or "O" and index is just a number
-      boardHTML += `<div id=square-${index} class="square">${square}</div>`;
+      boardHTML += `<div id="square-${index}" class="square">${square}</div>`;
     });
     document.querySelector('.gameBoard').innerHTML = boardHTML;
+
+    // add event listener for each of the square box
+    const squares = document.querySelectorAll('.square');
+    console.log(squares);
+    squares.forEach((square) => {
+      square.addEventListener('click', game.handleClick); //handleclick is part of game, so put in game module
+    });
   };
   return { render };
 })();
@@ -50,7 +57,12 @@ const game = (function () {
     // console.log('started');
     gameBoard.render();
   };
-  return { start };
+  const handleClick = (event) => {
+    // event.target.id gives the id as square-4, but we only want the number so
+    const index = parseInt(event.target.id.split('-')[1]);
+    console.log(index);
+  };
+  return { start, handleClick };
 })();
 
 // const initializeVaraibles = (data) => {
